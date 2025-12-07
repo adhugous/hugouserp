@@ -110,7 +110,7 @@ class Account extends BaseModel
 {
     protected $fillable = [
         'account_number',        // Unique account number
-        'parent_account_id',     // For hierarchical structure
+        'parent_id',             // For hierarchical structure
         'name',                  // English name
         'name_ar',              // Arabic name
         'type',                  // asset, liability, revenue, expense, equity
@@ -158,12 +158,12 @@ class Account extends BaseModel
 // In Account model
 public function parent(): BelongsTo
 {
-    return $this->belongsTo(Account::class, 'parent_account_id');
+    return $this->belongsTo(Account::class, 'parent_id');
 }
 
 public function children(): HasMany
 {
-    return $this->hasMany(Account::class, 'parent_account_id');
+    return $this->hasMany(Account::class, 'parent_id');
 }
 ```
 
@@ -1005,7 +1005,7 @@ AccountingService::generatePayrollJournalEntry($payroll);
 | Automatic journal entries (Rental) | ✅ 100% | AccountingService.php:221 |
 | Automatic journal entries (Payroll) | ✅ 100% | AccountingService.php:291 |
 | Chart of Accounts | ✅ 100% | Account.php |
-| Hierarchical accounts | ✅ 100% | parent_account_id |
+| Hierarchical accounts | ✅ 100% | parent_id |
 | Multi-currency accounts | ✅ 100% | currency_code field |
 | Account Mappings | ✅ 100% | AccountMapping.php |
 | Module-account linking | ✅ 100% | account_mappings table |

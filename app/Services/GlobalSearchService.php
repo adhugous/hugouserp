@@ -128,7 +128,7 @@ class GlobalSearchService
                 'searchable_id' => $model->id,
             ],
             [
-                'branch_id' => $model->branch_id ?? 1,
+                'branch_id' => $model->branch_id ?? config('app.default_branch_id', 1),
                 'title' => $title,
                 'content' => $content,
                 'module' => $config['module'],

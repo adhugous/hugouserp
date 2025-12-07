@@ -90,7 +90,8 @@ class SearchIndex extends BaseModel
     {
         try {
             $connection = config('database.default');
-            return in_array($connection, ['mysql', 'pgsql']);
+            $driver = config("database.connections.{$connection}.driver");
+            return in_array($driver, ['mysql', 'pgsql']);
         } catch (\Exception $e) {
             return false;
         }

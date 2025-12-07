@@ -34,7 +34,10 @@ return new class extends Migration
         });
 
         // Add fulltext index if database supports it (MySQL/PostgreSQL)
-        if (in_array(config('database.default'), ['mysql', 'pgsql'])) {
+        $connection = config('database.default');
+        $driver = config("database.connections.{$connection}.driver");
+        
+        if (in_array($driver, ['mysql', 'pgsql'])) {
             Schema::table('search_index', function (Blueprint $table) {
                 $table->fullText(['title', 'content']);
             });

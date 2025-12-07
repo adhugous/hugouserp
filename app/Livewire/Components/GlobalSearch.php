@@ -45,9 +45,12 @@ class GlobalSearch extends Component
         try {
             $searchService = app(GlobalSearchService::class);
             
+            $user = auth()->user();
+            $branchId = $user ? ($user->current_branch_id ?? null) : null;
+            
             $result = $searchService->search(
                 $this->query,
-                auth()->user()->current_branch_id ?? null,
+                $branchId,
                 $this->selectedModule,
                 auth()->id()
             );

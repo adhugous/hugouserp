@@ -99,6 +99,8 @@ class RolesAndPermissionsSeeder extends Seeder
             'hrm.attendance.view',
             'hrm.payroll.view',
             'hrm.payroll.run',
+            'hrm.shifts.view',
+            'hrm.shifts.manage',
             'rental.view-reports',
             'rental.manage-units',
             'rental.manage-tenants',

@@ -603,6 +603,37 @@ Route::middleware('auth')->group(function () {
             ->name('sla-policies.index')
             ->middleware('can:helpdesk.manage');
     });
+
+    // Projects Routes
+    Route::prefix('projects')->name('projects.')->group(function () {
+        Route::get('/', \App\Livewire\Projects\Index::class)
+            ->name('index')
+            ->middleware('can:projects.view');
+        
+        Route::get('/create', \App\Livewire\Projects\Form::class)
+            ->name('create')
+            ->middleware('can:projects.create');
+        
+        Route::get('/{project}', \App\Livewire\Projects\Show::class)
+            ->name('show')
+            ->middleware('can:projects.view');
+        
+        Route::get('/{project}/edit', \App\Livewire\Projects\Form::class)
+            ->name('edit')
+            ->middleware('can:projects.edit');
+        
+        Route::get('/{project}/tasks', \App\Livewire\Projects\Tasks::class)
+            ->name('tasks')
+            ->middleware('can:projects.tasks.view');
+        
+        Route::get('/{project}/time-logs', \App\Livewire\Projects\TimeLogs::class)
+            ->name('time-logs')
+            ->middleware('can:projects.timelogs.view');
+        
+        Route::get('/{project}/expenses', \App\Livewire\Projects\Expenses::class)
+            ->name('expenses')
+            ->middleware('can:projects.expenses.view');
+    });
 });
 
 // Scheduled reports manager

@@ -68,6 +68,16 @@ class Purchase extends BaseModel
         return $this->hasMany(ReturnNote::class);
     }
 
+    public function requisitions(): HasMany
+    {
+        return $this->hasMany(PurchaseRequisition::class, 'converted_to_po_id');
+    }
+
+    public function grns(): HasMany
+    {
+        return $this->hasMany(GoodsReceivedNote::class, 'purchase_id');
+    }
+
     public function createdBy(): BelongsTo
     {
         return $this->belongsTo(User::class, 'created_by');
@@ -76,5 +86,28 @@ class Purchase extends BaseModel
     public function updatedBy(): BelongsTo
     {
         return $this->belongsTo(User::class, 'updated_by');
+    }
+
+    // Business Logic
+    public function getTotalQuantityReceived(): float
+    {
+        return $this->grns()->where('status', 'approved')->get()->sum(function ($grn) {
+            return $grn->getTotalQuantityAccepted();
+        });
+    }
+
+    public function isFullyReceived(): bool
+    {
+        $orderedQty = $this->items->sum('qty');
+        $receivedQty = $this->getTotalQuantityReceived();
+
+        return $receivedQty >= $orderedQty;
+    }
+
+    public function isPartiallyReceived(): bool
+    {
+        $receivedQty = $this->getTotalQuantityReceived();
+
+        return $receivedQty > 0 && !$this->isFullyReceived();
     }
 }

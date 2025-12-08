@@ -34,4 +34,29 @@ class HREmployee extends BaseModel
     {
         return $this->hasMany(Payroll::class, 'employee_id');
     }
+
+    public function employeeShifts(): HasMany
+    {
+        return $this->hasMany(EmployeeShift::class, 'employee_id');
+    }
+
+    public function shifts()
+    {
+        return $this->belongsToMany(Shift::class, 'employee_shifts', 'employee_id', 'shift_id')
+            ->withPivot(['start_date', 'end_date', 'is_active'])
+            ->withTimestamps();
+    }
+
+    public function currentShift()
+    {
+        return $this->employeeShifts()
+            ->where('is_active', true)
+            ->where('start_date', '<=', now()->toDateString())
+            ->where(function ($q) {
+                $q->whereNull('end_date')
+                    ->orWhere('end_date', '>=', now()->toDateString());
+            })
+            ->with('shift')
+            ->first();
+    }
 }

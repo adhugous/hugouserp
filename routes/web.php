@@ -502,6 +502,69 @@ Route::middleware('auth')->group(function () {
         //     ->name('dashboard')
         //     ->middleware('can:manufacturing.view');
     });
+
+    // Fixed Assets: Asset Management & Depreciation
+    Route::prefix('fixed-assets')->name('fixed-assets.')->group(function () {
+        Route::get('/', \App\Livewire\FixedAssets\Index::class)
+            ->name('index')
+            ->middleware('can:fixed-assets.view');
+
+        Route::get('/create', \App\Livewire\FixedAssets\Form::class)
+            ->name('create')
+            ->middleware('can:fixed-assets.create');
+
+        Route::get('/{asset}/edit', \App\Livewire\FixedAssets\Form::class)
+            ->name('edit')
+            ->middleware('can:fixed-assets.edit');
+    });
+
+    // Banking: Bank Accounts & Transactions
+    Route::prefix('banking')->name('banking.')->group(function () {
+        Route::prefix('accounts')->name('accounts.')->group(function () {
+            Route::get('/', \App\Livewire\Banking\Accounts\Index::class)
+                ->name('index')
+                ->middleware('can:banking.view');
+
+            Route::get('/create', \App\Livewire\Banking\Accounts\Form::class)
+                ->name('create')
+                ->middleware('can:banking.create');
+
+            Route::get('/{account}/edit', \App\Livewire\Banking\Accounts\Form::class)
+                ->name('edit')
+                ->middleware('can:banking.edit');
+        });
+    });
+
+    // Inventory: Batch & Serial Tracking
+    Route::prefix('inventory')->name('inventory.')->group(function () {
+        Route::prefix('batches')->name('batches.')->group(function () {
+            Route::get('/', \App\Livewire\Inventory\Batches\Index::class)
+                ->name('index')
+                ->middleware('can:inventory.products.view');
+
+            Route::get('/create', \App\Livewire\Inventory\Batches\Form::class)
+                ->name('create')
+                ->middleware('can:inventory.products.view');
+
+            Route::get('/{batch}/edit', \App\Livewire\Inventory\Batches\Form::class)
+                ->name('edit')
+                ->middleware('can:inventory.products.view');
+        });
+
+        Route::prefix('serials')->name('serials.')->group(function () {
+            Route::get('/', \App\Livewire\Inventory\Serials\Index::class)
+                ->name('index')
+                ->middleware('can:inventory.products.view');
+
+            Route::get('/create', \App\Livewire\Inventory\Serials\Form::class)
+                ->name('create')
+                ->middleware('can:inventory.products.view');
+
+            Route::get('/{serial}/edit', \App\Livewire\Inventory\Serials\Form::class)
+                ->name('edit')
+                ->middleware('can:inventory.products.view');
+        });
+    });
 });
 
 // Scheduled reports manager

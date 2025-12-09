@@ -24,6 +24,7 @@ class PurchaseService implements PurchaseServiceInterface
                     'supplier_id' => $payload['supplier_id'] ?? null,
                     'status' => 'draft',
                     'sub_total' => 0, 'tax_total' => 0, 'discount_total' => 0, 'grand_total' => 0,
+                    'paid_total' => 0, 'due_total' => 0,
                 ]);
                 foreach ($payload['items'] ?? [] as $it) {
                     PurchaseItem::create([
@@ -36,6 +37,7 @@ class PurchaseService implements PurchaseServiceInterface
                 }
                 $p->sub_total = (float) $p->items()->sum('line_total');
                 $p->grand_total = $p->sub_total;
+                $p->due_total = $p->grand_total;
                 $p->save();
 
                 return $p;
@@ -84,6 +86,7 @@ class PurchaseService implements PurchaseServiceInterface
             callback: function () use ($id, $amount) {
                 $p = Purchase::findOrFail($id);
                 $p->paid_total = round((float) $p->paid_total + $amount, 2);
+                $p->due_total = round(max(0, $p->grand_total - $p->paid_total), 2);
                 if ($p->paid_total >= $p->grand_total) {
                     $p->status = 'paid';
                 }

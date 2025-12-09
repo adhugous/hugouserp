@@ -45,6 +45,8 @@ class BranchModule extends Pivot
         'activated_at' => 'datetime',
     ];
 
+    public $incrementing = true;
+    protected $keyType = 'int';
     public $timestamps = true;
 
     /** Relationships */

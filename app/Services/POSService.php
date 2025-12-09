@@ -75,7 +75,9 @@ class POSService implements POSServiceInterface
                 }
 
                 foreach ($items as $it) {
-                    $product = Product::findOrFail($it['product_id']);
+                    // Use lockForUpdate() to prevent concurrent stock issues and overselling
+                    // Note: In high-concurrency environments, handle potential deadlocks with retry logic
+                    $product = Product::lockForUpdate()->findOrFail($it['product_id']);
                     $qty = (float) ($it['qty'] ?? 1);
                     $price = isset($it['price']) ? (float) $it['price'] : (float) $product->price;
 

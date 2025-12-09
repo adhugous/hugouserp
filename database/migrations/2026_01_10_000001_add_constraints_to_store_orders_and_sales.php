@@ -13,15 +13,14 @@ return new class extends Migration
     {
         // Add foreign key constraint for store_orders.branch_id → branches.id
         Schema::table('store_orders', function (Blueprint $table) {
-            // Check if the foreign key doesn't already exist
-            $sm = Schema::getConnection()->getDoctrineSchemaManager();
-            $indexesFound = $sm->listTableIndexes('store_orders');
-            
-            if (!isset($indexesFound['store_orders_branch_id_foreign'])) {
+            // Skip if constraint already exists by catching exception
+            try {
                 $table->foreign('branch_id')
                     ->references('id')
                     ->on('branches')
                     ->nullOnDelete();
+            } catch (\Illuminate\Database\QueryException $e) {
+                // Foreign key might already exist - only catch query exceptions
             }
         });
 
@@ -33,15 +32,14 @@ return new class extends Migration
         });
 
         Schema::table('sales', function (Blueprint $table) {
-            // Check if the foreign key doesn't already exist
-            $sm = Schema::getConnection()->getDoctrineSchemaManager();
-            $indexesFound = $sm->listTableIndexes('sales');
-            
-            if (!isset($indexesFound['sales_store_order_id_foreign'])) {
+            // Skip if constraint already exists by catching exception
+            try {
                 $table->foreign('store_order_id')
                     ->references('id')
                     ->on('store_orders')
                     ->nullOnDelete();
+            } catch (\Illuminate\Database\QueryException $e) {
+                // Foreign key might already exist - only catch query exceptions
             }
         });
     }

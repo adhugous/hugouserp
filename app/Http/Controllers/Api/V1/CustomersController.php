@@ -14,13 +14,26 @@ class CustomersController extends BaseApiController
     {
         $store = $this->getStore($request);
 
+        $validated = $request->validate([
+            'sort_by' => 'sometimes|string|in:created_at,id,name,email',
+            'sort_dir' => 'sometimes|string|in:asc,desc',
+        ]);
+
+        $sortBy = $validated['sort_by'] ?? 'created_at';
+        $sortDir = $validated['sort_dir'] ?? 'desc';
+
         $query = Customer::query()
             ->when($store?->branch_id, fn ($q) => $q->where('branch_id', $store->branch_id))
-            ->when($request->filled('search'), fn ($q) => $q->where('name', 'like', '%'.$request->search.'%')
-                ->orWhere('email', 'like', '%'.$request->search.'%')
-                ->orWhere('phone', 'like', '%'.$request->search.'%')
-            )
-            ->orderBy($request->get('sort_by', 'created_at'), $request->get('sort_dir', 'desc'));
+            ->when($request->filled('search'), function ($q) use ($request) {
+                $search = $request->string('search');
+                $q->where(function ($searchQuery) use ($search) {
+                    $searchQuery
+                        ->where('name', 'like', "%{$search}%")
+                        ->orWhere('email', 'like', "%{$search}%")
+                        ->orWhere('phone', 'like', "%{$search}%");
+                });
+            })
+            ->orderBy($sortBy, $sortDir);
 
         $customers = $query->paginate($request->get('per_page', 50));
 

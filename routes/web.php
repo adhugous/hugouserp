@@ -530,12 +530,12 @@ Route::middleware('auth')->group(function () {
             ->middleware('can:projects.manage');
 
         // Tasks
-        Route::get('/{project}/tasks', \App\Livewire\Projects\Tasks\Index::class)
+        Route::get('/{project}/tasks', \App\Livewire\Projects\Tasks::class)
             ->name('tasks.index')
             ->middleware('can:projects.view');
 
         // Expenses
-        Route::get('/{project}/expenses', \App\Livewire\Projects\Expenses\Index::class)
+        Route::get('/{project}/expenses', \App\Livewire\Projects\Expenses::class)
             ->name('expenses.index')
             ->middleware('can:projects.view');
     });

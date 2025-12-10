@@ -45,6 +45,9 @@ class Index extends Component
 
         $this->branchId = $user->branch_id;
         $this->isAdmin = $user->hasRole('super-admin') || $user->hasRole('admin');
+        
+        // Load cache TTL from system settings
+        $this->cacheTtl = (int) (\App\Models\SystemSetting::where('key', 'advanced.cache_ttl')->value('value') ?? 300);
 
         $this->loadStats();
         $this->loadChartData();

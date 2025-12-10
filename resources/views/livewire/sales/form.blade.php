@@ -62,10 +62,9 @@
                 <div>
                     <label class="erp-label">{{ __('Currency') }}</label>
                     <select wire:model="currency" class="erp-input">
-                        <option value="EGP">EGP</option>
-                        <option value="USD">USD</option>
-                        <option value="EUR">EUR</option>
-                        <option value="SAR">SAR</option>
+                        @foreach($currencies as $curr)
+                            <option value="{{ $curr->code }}">{{ $curr->code }} - {{ $curr->name }} ({{ $curr->symbol }})</option>
+                        @endforeach
                     </select>
                 </div>
 

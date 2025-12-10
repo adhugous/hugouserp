@@ -220,7 +220,7 @@ class Form extends Component
                 });
             },
             successMessage: $this->editMode ? __('Purchase updated successfully') : __('Purchase created successfully'),
-            redirectRoute: 'purchases.index'
+            redirectRoute: 'app.purchases.index'
         );
     }
 

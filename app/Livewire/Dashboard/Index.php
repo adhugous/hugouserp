@@ -160,7 +160,7 @@ class Index extends Component
                 ->get();
 
             $paymentMethodsData = [
-                'labels' => $paymentMethodsRaw->pluck('method')->map(fn ($m) => ucfirst($m ?? 'cash'))->toArray(),
+                'labels' => $paymentMethodsRaw->pluck('payment_method')->map(fn ($m) => ucfirst($m ?? 'cash'))->toArray(),
                 'data' => $paymentMethodsRaw->pluck('count')->toArray(),
                 'totals' => $paymentMethodsRaw->pluck('total')->toArray(),
             ];

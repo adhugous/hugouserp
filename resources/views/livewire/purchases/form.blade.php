@@ -4,7 +4,7 @@
             <h1 class="text-2xl font-bold text-slate-800">{{ $editMode ? __('Edit Purchase') : __('New Purchase') }}</h1>
             <p class="text-sm text-slate-500">{{ __('Create purchase order from supplier') }}</p>
         </div>
-        <a href="{{ route('purchases.index') }}" class="erp-btn erp-btn-secondary">{{ __('Back') }}</a>
+        <a href="{{ route('app.purchases.index') }}" class="erp-btn erp-btn-secondary">{{ __('Back') }}</a>
     </div>
 
     <form wire:submit="save" class="space-y-6">
@@ -204,7 +204,7 @@
         </div>
 
         <div class="flex justify-end gap-3">
-            <a href="{{ route('purchases.index') }}" class="erp-btn erp-btn-secondary">{{ __('Cancel') }}</a>
+            <a href="{{ route('app.purchases.index') }}" class="erp-btn erp-btn-secondary">{{ __('Cancel') }}</a>
             <button type="submit" class="erp-btn erp-btn-primary">{{ $editMode ? __('Update Purchase') : __('Create Purchase') }}</button>
         </div>
     </form>

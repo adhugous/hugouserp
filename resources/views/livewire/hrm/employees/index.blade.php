@@ -25,7 +25,7 @@
                     <option value="inactive">{{ __('Inactive') }}</option>
                 </select>
 
-                <a href="{{ route('hrm.employees.create') }}"
+                <a href="{{ route('app.hrm.employees.create') }}"
                    class="erp-btn-primary text-xs px-3 py-2">
                     {{ __('Add employee') }}
                 </a>
@@ -102,7 +102,7 @@
                             @endif
                         </td>
                         <td class="px-3 py-2 whitespace-nowrap text-xs text-right">
-                            <a href="{{ route('hrm.employees.edit', $employee->id) }}"
+                            <a href="{{ route('app.hrm.employees.edit', $employee->id) }}"
                                class="inline-flex items-center rounded-lg border border-slate-200 dark:border-slate-700 px-2 py-1 text-[11px] font-medium text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800">
                                 <i class="mdi mdi-pencil-outline text-[13px] mr-1"></i>
                                 {{ __('Edit') }}

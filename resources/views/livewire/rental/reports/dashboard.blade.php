@@ -16,14 +16,15 @@
             </p>
         </div>
         <div class="flex items-center space-x-3">
-            <a href="{{ route('rental.reports.occupancy.export') }}"
+            {{-- TODO: Implement export routes --}}
+            {{-- <a href="{{ route('app.rental.reports.occupancy.export') }}"
                class="erp-btn-primary">
                 Export Occupancy CSV
             </a>
-            <a href="{{ route('rental.reports.contracts.expiring.export') }}"
+            <a href="{{ route('app.rental.reports.contracts.expiring.export') }}"
                class="erp-btn-primary">
                 Export Expiring Contracts CSV
-            </a>
+            </a> --}}
         </div>
     </div>
 

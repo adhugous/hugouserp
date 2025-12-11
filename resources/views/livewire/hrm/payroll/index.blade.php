@@ -32,7 +32,7 @@
                     <option value="paid">{{ __('Paid') }}</option>
                 </select>
 
-                <a href="{{ route('hrm.payroll.run') }}"
+                <a href="{{ route('app.hrm.payroll.run') }}"
                    class="erp-btn-primary text-xs px-3 py-2">
                     {{ __('Run payroll') }}
                 </a>

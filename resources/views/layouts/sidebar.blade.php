@@ -142,11 +142,11 @@
 
         {{-- Expenses Management --}}
         @if($canAccess('expenses.view'))
-        <a href="{{ route('expenses.index') }}"
-           class="sidebar-link bg-gradient-to-r from-slate-500 to-slate-600 {{ $isActive('expenses') ? 'active ring-2 ring-white/30' : '' }}">
+        <a href="{{ route('app.expenses.index') }}"
+           class="sidebar-link bg-gradient-to-r from-slate-500 to-slate-600 {{ $isActive('app.expenses') ? 'active ring-2 ring-white/30' : '' }}">
             <span class="text-lg">📋</span>
             <span class="text-sm font-medium">{{ __('Expenses') }}</span>
-            @if($isActive('expenses'))
+            @if($isActive('app.expenses'))
                 <span class="ms-auto w-2 h-2 rounded-full bg-white animate-pulse"></span>
             @endif
         </a>
@@ -154,11 +154,11 @@
 
         {{-- Income Management --}}
         @if($canAccess('income.view'))
-        <a href="{{ route('income.index') }}"
-           class="sidebar-link bg-gradient-to-r from-emerald-500 to-emerald-600 {{ $isActive('income') ? 'active ring-2 ring-white/30' : '' }}">
+        <a href="{{ route('app.income.index') }}"
+           class="sidebar-link bg-gradient-to-r from-emerald-500 to-emerald-600 {{ $isActive('app.income') ? 'active ring-2 ring-white/30' : '' }}">
             <span class="text-lg">💵</span>
             <span class="text-sm font-medium">{{ __('Manage Income') }}</span>
-            @if($isActive('income'))
+            @if($isActive('app.income'))
                 <span class="ms-auto w-2 h-2 rounded-full bg-white animate-pulse"></span>
             @endif
         </a>
@@ -318,11 +318,11 @@
 
         {{-- HR Module --}}
         @if($canAccess('hrm.employees.view'))
-        <a href="{{ route('hrm.employees.index') }}"
-           class="sidebar-link bg-gradient-to-r from-rose-500 to-rose-600 {{ $isActive('hrm') ? 'active ring-2 ring-white/30' : '' }}">
+        <a href="{{ route('app.hrm.employees.index') }}"
+           class="sidebar-link bg-gradient-to-r from-rose-500 to-rose-600 {{ $isActive('app.hrm') ? 'active ring-2 ring-white/30' : '' }}">
             <span class="text-lg">👔</span>
             <span class="text-sm font-medium">{{ __('Human Resources') }}</span>
-            @if($isActive('hrm'))
+            @if($isActive('app.hrm'))
                 <span class="ms-auto w-2 h-2 rounded-full bg-white animate-pulse"></span>
             @endif
         </a>
@@ -331,23 +331,23 @@
         {{-- Rental Module --}}
         @if($canAccess('rental.units.view') || $canAccess('rentals.view'))
         <div class="space-y-1">
-            <a href="{{ route('rental.units.index') }}"
-               class="sidebar-link bg-gradient-to-r from-lime-500 to-lime-600 {{ $isActive('rental.units') ? 'active ring-2 ring-white/30' : '' }}">
+            <a href="{{ route('app.rental.units.index') }}"
+               class="sidebar-link bg-gradient-to-r from-lime-500 to-lime-600 {{ $isActive('app.rental.units') ? 'active ring-2 ring-white/30' : '' }}">
                 <span class="text-lg">🏠</span>
                 <span class="text-sm font-medium">{{ __('Rental Management') }}</span>
-                @if($isActive('rental.units'))
+                @if($isActive('app.rental.units'))
                     <span class="ms-auto w-2 h-2 rounded-full bg-white animate-pulse"></span>
                 @endif
             </a>
             
             @if($canAccess('rentals.view'))
             <a href="{{ route('app.rental.properties.index') }}"
-               class="sidebar-link-secondary ms-4 {{ $isActive('rental.properties') ? 'active' : '' }}">
+               class="sidebar-link-secondary ms-4 {{ $isActive('app.rental.properties') ? 'active' : '' }}">
                 <span class="text-base">🏢</span>
                 <span class="text-sm">{{ __('Properties') }}</span>
             </a>
-            <a href="{{ route('rental.tenants.index') }}"
-               class="sidebar-link-secondary ms-4 {{ $isActive('rental.tenants') ? 'active' : '' }}">
+            <a href="{{ route('app.rental.tenants.index') }}"
+               class="sidebar-link-secondary ms-4 {{ $isActive('app.rental.tenants') ? 'active' : '' }}">
                 <span class="text-base">👥</span>
                 <span class="text-sm">{{ __('Tenants') }}</span>
             </a>

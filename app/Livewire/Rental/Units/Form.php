@@ -164,7 +164,7 @@ class Form extends Component
                 : __('Rental unit created successfully.')
         );
 
-        $this->redirectRoute('rental.units.index', navigate: true);
+        $this->redirectRoute('app.rental.units.index', navigate: true);
     }
 
     #[Layout('layouts.app')]

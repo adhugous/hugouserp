@@ -188,20 +188,20 @@
             </div>
             
             @if($canAccess('rentals.view'))
-            <a href="{{ route('rental.properties.index') }}"
-               class="sidebar-link-secondary {{ $isActive('rental.properties') ? 'active' : '' }}">
+            <a href="{{ route('app.rental.properties.index') }}"
+               class="sidebar-link-secondary {{ $isActive('app.rental.properties') ? 'active' : '' }}">
                 <span class="text-base">🏢</span>
                 <span class="text-sm">{{ __('Properties') }}</span>
             </a>
             
             <a href="{{ route('app.rental.units.index') }}"
-               class="sidebar-link-secondary {{ $isActive('rental.units') ? 'active' : '' }}">
+               class="sidebar-link-secondary {{ $isActive('app.rental.units') ? 'active' : '' }}">
                 <span class="text-base">🏠</span>
                 <span class="text-sm">{{ __('Units') }}</span>
             </a>
             
-            <a href="{{ route('rental.tenants.index') }}"
-               class="sidebar-link-secondary {{ $isActive('rental.tenants') ? 'active' : '' }}">
+            <a href="{{ route('app.rental.tenants.index') }}"
+               class="sidebar-link-secondary {{ $isActive('app.rental.tenants') ? 'active' : '' }}">
                 <span class="text-base">👥</span>
                 <span class="text-sm">{{ __('Tenants') }}</span>
             </a>
@@ -249,8 +249,8 @@
                 <span class="text-xs uppercase tracking-wide text-slate-500 font-semibold">{{ __('HRM') }}</span>
             </div>
             
-            <a href="{{ route('hrm.employees.index') }}"
-               class="sidebar-link-secondary {{ $isActive('hrm.employees') ? 'active' : '' }}">
+            <a href="{{ route('app.hrm.employees.index') }}"
+               class="sidebar-link-secondary {{ $isActive('app.hrm.employees') ? 'active' : '' }}">
                 <span class="text-base">👔</span>
                 <span class="text-sm">{{ __('Employees') }}</span>
             </a>

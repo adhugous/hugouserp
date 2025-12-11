@@ -34,7 +34,7 @@
                 <input type="date" wire:model="toDate" class="erp-input text-xs w-36">
             </div>
 
-            <a href="{{ route('rental.contracts.create') }}"
+            <a href="{{ route('app.rental.contracts.create') }}"
                class="erp-btn-primary text-xs px-3 py-2">
                 {{ __('Add contract') }}
             </a>

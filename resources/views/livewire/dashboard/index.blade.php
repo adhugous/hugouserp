@@ -45,7 +45,7 @@
         </a>
 
         {{-- Sales Report --}}
-        <a href="{{ route('admin.reports.hub') }}" class="group flex flex-col items-center gap-3 p-5 bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-lg hover:border-blue-200 transition-all duration-300">
+        <a href="{{ route('admin.reports.index') }}" class="group flex flex-col items-center gap-3 p-5 bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-lg hover:border-blue-200 transition-all duration-300">
             <div class="w-16 h-16 flex items-center justify-center rounded-full bg-gradient-to-br from-blue-100 to-blue-50 group-hover:scale-110 transition-transform">
                 <svg class="w-8 h-8 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
@@ -75,7 +75,7 @@
         </a>
 
         {{-- Settings --}}
-        <a href="{{ route('admin.settings.system') }}" class="group flex flex-col items-center gap-3 p-5 bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-lg hover:border-gray-200 transition-all duration-300">
+        <a href="{{ route('admin.settings') }}" class="group flex flex-col items-center gap-3 p-5 bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-lg hover:border-gray-200 transition-all duration-300">
             <div class="w-16 h-16 flex items-center justify-center rounded-full bg-gradient-to-br from-gray-100 to-gray-50 group-hover:scale-110 transition-transform">
                 <svg class="w-8 h-8 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
@@ -86,7 +86,7 @@
         </a>
 
         {{-- Advanced Settings --}}
-        <a href="{{ route('admin.settings.advanced') }}" class="group flex flex-col items-center gap-3 p-5 bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-lg hover:border-rose-200 transition-all duration-300">
+        <a href="{{ route('admin.settings', ['tab' => 'advanced']) }}" class="group flex flex-col items-center gap-3 p-5 bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-lg hover:border-rose-200 transition-all duration-300">
             <div class="w-16 h-16 flex items-center justify-center rounded-full bg-gradient-to-br from-rose-100 to-rose-50 group-hover:scale-110 transition-transform">
                 <svg class="w-8 h-8 text-rose-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
@@ -212,7 +212,7 @@
         <div class="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
             <div class="flex items-center justify-between mb-4">
                 <h3 class="text-lg font-semibold text-slate-800">{{ __('Recent Sales') }}</h3>
-                <a href="{{ route('admin.reports.hub') }}" class="text-sm text-emerald-600 hover:text-emerald-700">{{ __('View All') }}</a>
+                <a href="{{ route('admin.reports.index') }}" class="text-sm text-emerald-600 hover:text-emerald-700">{{ __('View All') }}</a>
             </div>
             @if(count($recentSales) > 0)
                 <div class="space-y-3">

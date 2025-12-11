@@ -78,8 +78,15 @@ class BankingService
                 ]);
             
             // Recalculate difference
-            $reconciledTotal = BankTransaction::where('reconciliation_id', $reconciliation->id)
-                ->sum(DB::raw('CASE WHEN type IN ("deposit", "interest") THEN amount ELSE -amount END'));
+            $deposits = BankTransaction::where('reconciliation_id', $reconciliation->id)
+                ->whereIn('type', ['deposit', 'interest'])
+                ->sum('amount');
+            
+            $withdrawals = BankTransaction::where('reconciliation_id', $reconciliation->id)
+                ->whereNotIn('type', ['deposit', 'interest'])
+                ->sum('amount');
+            
+            $reconciledTotal = $deposits - $withdrawals;
             
             $newDifference = $reconciliation->statement_balance - $reconciliation->book_balance - $reconciledTotal;
             

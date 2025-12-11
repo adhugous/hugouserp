@@ -28,8 +28,9 @@ class InventoryController extends BaseApiController
                 'products.sku',
                 'products.min_stock',
                 'products.branch_id',
-                DB::raw('COALESCE(SUM(CASE WHEN stock_movements.direction = "in" THEN stock_movements.qty ELSE 0 END) - SUM(CASE WHEN stock_movements.direction = "out" THEN stock_movements.qty ELSE 0 END), 0) as current_quantity'),
+                DB::raw('COALESCE(SUM(CASE WHEN stock_movements.direction = ? THEN stock_movements.qty ELSE 0 END) - SUM(CASE WHEN stock_movements.direction = ? THEN stock_movements.qty ELSE 0 END), 0) as current_quantity'),
             ])
+            ->addBinding(['in', 'out'], 'select')
             ->leftJoin('stock_movements', 'products.id', '=', 'stock_movements.product_id')
             ->when($store?->branch_id, fn ($q) => $q->where('products.branch_id', $store->branch_id))
             ->when($request->filled('sku'), fn ($q) => $q->where('products.sku', $validated['sku']))

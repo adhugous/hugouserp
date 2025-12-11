@@ -144,7 +144,7 @@ class StockAlertService
                         ->count(),
                     'critical_count' => (clone $query)
                         ->where('status', 'active')
-                        ->whereColumn('current_qty', '<=', \DB::raw('min_qty * 0.25'))
+                        ->whereRaw('current_qty <= min_qty * 0.25')
                         ->count(),
                 ];
             },

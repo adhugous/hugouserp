@@ -15,6 +15,10 @@ class ScheduledReportService
 {
     protected string $storagePath = 'reports';
 
+    public function __construct(
+        protected DatabaseCompatibilityService $dbCompat
+    ) {}
+
     public function generateAndSend(
         ReportTemplate $template,
         string $format,
@@ -66,9 +70,10 @@ class ScheduledReportService
     protected function fetchSalesReportData(array $filters): array
     {
         try {
+            $dateExpr = $this->dbCompat->castDate('created_at');
             $query = DB::table('sales')
                 ->select([
-                    DB::raw('DATE(created_at) as date'),
+                    DB::raw("{$dateExpr} as date"),
                     DB::raw('COUNT(*) as orders_count'),
                     DB::raw('SUM(grand_total) as total_sales'),
                     DB::raw('AVG(grand_total) as avg_order'),
@@ -84,7 +89,7 @@ class ScheduledReportService
                 $query->where('branch_id', (int) $filters['branch_id']);
             }
 
-            return $query->groupBy(DB::raw('DATE(created_at)'))
+            return $query->groupBy(DB::raw($dateExpr))
                 ->orderByDesc('date')
                 ->limit(100)
                 ->get()

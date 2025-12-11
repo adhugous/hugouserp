@@ -108,37 +108,37 @@
             'children' => [
                 [
                     'label' => __('Products'),
-                    'route' => 'inventory.products.index',
+                    'route' => 'app.inventory.products.index',
                     'permission' => 'inventory.products.view',
                     'icon' => '📦',
                 ],
                 [
                     'label' => __('Categories'),
-                    'route' => 'inventory.categories.index',
+                    'route' => 'app.inventory.categories.index',
                     'permission' => 'inventory.products.view',
                     'icon' => '📂',
                 ],
                 [
                     'label' => __('Units of Measure'),
-                    'route' => 'inventory.units.index',
+                    'route' => 'app.inventory.units.index',
                     'permission' => 'inventory.products.view',
                     'icon' => '📏',
                 ],
                 [
                     'label' => __('Low Stock Alerts'),
-                    'route' => 'inventory.stock-alerts',
+                    'route' => 'app.inventory.stock-alerts',
                     'permission' => 'inventory.stock.alerts.view',
                     'icon' => '⚠️',
                 ],
                 [
                     'label' => __('Vehicle Models'),
-                    'route' => 'inventory.vehicle-models',
+                    'route' => 'app.inventory.vehicle-models',
                     'permission' => 'spares.compatibility.manage',
                     'icon' => '🚗',
                 ],
                 [
                     'label' => __('Print Barcodes'),
-                    'route' => 'inventory.barcode-print',
+                    'route' => 'app.inventory.barcodes',
                     'permission' => 'inventory.products.view',
                     'icon' => '🏷️',
                 ],

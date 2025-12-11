@@ -101,7 +101,7 @@
             @endif
             
             @if($canAccess('sales.return'))
-            <a href="{{ route('sales.returns') }}"
+            <a href="{{ route('app.sales.returns.index') }}"
                class="sidebar-link-secondary {{ $isActive('sales.returns') ? 'active' : '' }}">
                 <span class="text-base">↩️</span>
                 <span class="text-sm">{{ __('Returns') }}</span>
@@ -156,7 +156,7 @@
                 <span class="text-sm">{{ __('Products') }}</span>
             </a>
             
-            <a href="{{ route('inventory.categories.index') }}"
+            <a href="{{ route('app.inventory.categories.index') }}"
                class="sidebar-link-secondary {{ $isActive('inventory.categories') ? 'active' : '' }}">
                 <span class="text-base">📂</span>
                 <span class="text-sm">{{ __('Categories') }}</span>
@@ -171,7 +171,7 @@
             @endif
             
             @if($canAccess('inventory.stock.alerts.view'))
-            <a href="{{ route('inventory.stock-alerts') }}"
+            <a href="{{ route('app.inventory.stock-alerts') }}"
                class="sidebar-link-secondary {{ $isActive('inventory.stock-alerts') ? 'active' : '' }}">
                 <span class="text-base">⚠️</span>
                 <span class="text-sm">{{ __('Low Stock Alerts') }}</span>

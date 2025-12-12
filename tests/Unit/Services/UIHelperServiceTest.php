@@ -15,7 +15,7 @@ class UIHelperServiceTest extends TestCase
     {
         parent::setUp();
 
-        $this->service = new UIHelperService();
+        $this->service = new UIHelperService;
     }
 
     /** @test */

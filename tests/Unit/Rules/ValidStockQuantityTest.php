@@ -80,4 +80,16 @@ class ValidStockQuantityTest extends TestCase
 
         $this->assertTrue($failed, 'Should reject negative values');
     }
+
+    public function test_rejects_decimal_separator_without_fractional_digits(): void
+    {
+        $rule = new ValidStockQuantity(maxQuantity: 999999.99, decimalPlaces: 2);
+        $failed = false;
+
+        $rule->validate('quantity', '100.', function ($message) use (&$failed) {
+            $failed = true;
+        });
+
+        $this->assertTrue($failed, 'Should reject "100." when decimalPlaces allows decimals but value has trailing separator');
+    }
 }

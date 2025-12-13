@@ -205,7 +205,7 @@ class InventoryService implements InventoryServiceInterface
     {
         return $this->handleServiceOperation(
             callback: function () use ($productId, $qty, $warehouseId) {
-                if ($qty <= 0) {
+                if ($qty < 0) {
                     return false;
                 }
 

@@ -33,11 +33,19 @@ class WarehouseController extends Controller
 
     public function show(Warehouse $warehouse)
     {
+        // Security: Ensure warehouse belongs to current branch
+        $branchId = (int) request()->attributes->get('branch_id');
+        abort_if($warehouse->branch_id !== $branchId, 404, 'Warehouse not found in this branch');
+
         return $this->ok($warehouse);
     }
 
     public function update(WarehouseUpdateRequest $request, Warehouse $warehouse)
     {
+        // Security: Ensure warehouse belongs to current branch
+        $branchId = (int) $request->attributes->get('branch_id');
+        abort_if($warehouse->branch_id !== $branchId, 404, 'Warehouse not found in this branch');
+
         $warehouse->fill($request->validated())->save();
 
         return $this->ok($warehouse, __('Updated'));
@@ -45,6 +53,10 @@ class WarehouseController extends Controller
 
     public function destroy(Warehouse $warehouse)
     {
+        // Security: Ensure warehouse belongs to current branch
+        $branchId = (int) request()->attributes->get('branch_id');
+        abort_if($warehouse->branch_id !== $branchId, 404, 'Warehouse not found in this branch');
+
         $warehouse->delete();
 
         return $this->ok(null, __('Deleted'));

@@ -35,11 +35,19 @@ class CustomerController extends Controller
 
     public function show(Customer $customer)
     {
+        // Security: Ensure customer belongs to current branch
+        $branchId = (int) request()->attributes->get('branch_id');
+        abort_if($customer->branch_id !== $branchId, 404, 'Customer not found in this branch');
+
         return $this->ok($customer);
     }
 
     public function update(CustomerUpdateRequest $request, Customer $customer)
     {
+        // Security: Ensure customer belongs to current branch
+        $branchId = (int) $request->attributes->get('branch_id');
+        abort_if($customer->branch_id !== $branchId, 404, 'Customer not found in this branch');
+
         $customer->fill($request->validated())->save();
 
         return $this->ok($customer, __('Updated'));
@@ -47,6 +55,10 @@ class CustomerController extends Controller
 
     public function destroy(Customer $customer)
     {
+        // Security: Ensure customer belongs to current branch
+        $branchId = (int) request()->attributes->get('branch_id');
+        abort_if($customer->branch_id !== $branchId, 404, 'Customer not found in this branch');
+
         $customer->delete();
 
         return $this->ok(null, __('Deleted'));

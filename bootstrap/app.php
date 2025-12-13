@@ -16,9 +16,13 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        // WARNING: Trusting all proxies ('*') can allow IP spoofing.
+        // Security: Trusting all proxies ('*') can allow IP spoofing.
         // In production, configure specific proxy IPs via APP_TRUSTED_PROXIES env var
-        $middleware->trustProxies(at: env('APP_TRUSTED_PROXIES', '*'));
+        $trustedProxies = env('APP_TRUSTED_PROXIES');
+        if ($trustedProxies === '*' && app()->environment('production')) {
+            logger()->warning('Trusting all proxies (*) in production is a security risk. Set APP_TRUSTED_PROXIES to specific IPs.');
+        }
+        $middleware->trustProxies(at: $trustedProxies);
 
         $middleware->web(append: [
             \App\Http\Middleware\SecurityHeaders::class,

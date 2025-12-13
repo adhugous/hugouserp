@@ -35,11 +35,19 @@ class SupplierController extends Controller
 
     public function show(Supplier $supplier)
     {
+        // Security: Ensure supplier belongs to current branch
+        $branchId = (int) request()->attributes->get('branch_id');
+        abort_if($supplier->branch_id !== $branchId, 404, 'Supplier not found in this branch');
+
         return $this->ok($supplier);
     }
 
     public function update(SupplierUpdateRequest $request, Supplier $supplier)
     {
+        // Security: Ensure supplier belongs to current branch
+        $branchId = (int) $request->attributes->get('branch_id');
+        abort_if($supplier->branch_id !== $branchId, 404, 'Supplier not found in this branch');
+
         $supplier->fill($request->validated())->save();
 
         return $this->ok($supplier, __('Updated'));
@@ -47,6 +55,10 @@ class SupplierController extends Controller
 
     public function destroy(Supplier $supplier)
     {
+        // Security: Ensure supplier belongs to current branch
+        $branchId = (int) request()->attributes->get('branch_id');
+        abort_if($supplier->branch_id !== $branchId, 404, 'Supplier not found in this branch');
+
         $supplier->delete();
 
         return $this->ok(null, __('Deleted'));

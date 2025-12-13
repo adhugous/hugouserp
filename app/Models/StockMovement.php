@@ -29,6 +29,30 @@ class StockMovement extends BaseModel
         'extra_attributes' => 'array',
     ];
 
+    /**
+     * Support legacy attribute naming (quantity/type) while persisting to the
+     * canonical qty/direction columns.
+     */
+    public function setQuantityAttribute($value): void
+    {
+        $this->attributes['qty'] = $value;
+    }
+
+    public function getQuantityAttribute(): ?float
+    {
+        return $this->attributes['qty'] ?? null;
+    }
+
+    public function setTypeAttribute($value): void
+    {
+        $this->attributes['direction'] = $value;
+    }
+
+    public function getTypeAttribute(): ?string
+    {
+        return $this->attributes['direction'] ?? null;
+    }
+
     protected static function booted(): void
     {
         parent::booted();

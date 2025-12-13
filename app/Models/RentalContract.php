@@ -61,4 +61,9 @@ class RentalContract extends BaseModel
             default => $startDate->addDays($period->duration_value)->format('Y-m-d'),
         };
     }
+
+    public function scopeForBranch($query, int $branchId)
+    {
+        return $query->where('branch_id', $branchId);
+    }
 }

@@ -18,4 +18,9 @@ class Tenant extends BaseModel
     {
         return $this->hasMany(RentalContract::class);
     }
+
+    public function scopeForBranch($query, int $branchId)
+    {
+        return $query->where('branch_id', $branchId);
+    }
 }

@@ -24,4 +24,11 @@ class RentalUnit extends BaseModel
     {
         return $this->hasMany(RentalContract::class, 'unit_id');
     }
+
+    public function scopeForBranch($query, int $branchId)
+    {
+        return $query->whereHas('property', function ($q) use ($branchId) {
+            $q->where('branch_id', $branchId);
+        });
+    }
 }

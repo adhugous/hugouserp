@@ -24,4 +24,11 @@ class RentalInvoice extends BaseModel
     {
         return $this->hasMany(RentalPayment::class, 'invoice_id');
     }
+
+    public function scopeForBranch($query, int $branchId)
+    {
+        return $query->whereHas('contract', function ($q) use ($branchId) {
+            $q->where('branch_id', $branchId);
+        });
+    }
 }
